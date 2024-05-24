@@ -22,7 +22,10 @@ services:
     logging: *logging
 
   keycloak:
-    image: quay.io/keycloak/keycloak:${KC_VERSION}
+    build:
+      context: .
+      dockerfile: keycloak/Dockerfile  # (Optional) specify if Dockerfile is not named 'Dockerfile'
+    image: cpnet/keycloak:${KC_VERSION}
     command: ["start-dev", "--import-realm"]
     restart: unless-stopped
     environment:
